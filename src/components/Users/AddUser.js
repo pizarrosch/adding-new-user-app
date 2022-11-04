@@ -1,11 +1,16 @@
 import s from './AddUser.module.css';
-import {useState} from "react";
-import NewUser from "./NewUser";
+import React, {useState, useRef} from "react";
 import Card from '../UI/Card';
 import Button from "../UI/Button";
 import ErrorModal from "../UI/ErrorModal";
 
+
 function AddUser({onAddNewUser}) {
+
+  // As alternative one can use refs, if a value has to be read and not the whole value change process
+  // const nameInputRef = useRef();
+  // const ageInputRef = useRef();
+
 
   const [nameInput, setNameInput] = useState('');
   const [ageInput, setAgeInput] = useState('');
@@ -21,6 +26,10 @@ function AddUser({onAddNewUser}) {
 
   function addNewUser(e) {
     e.preventDefault();
+
+    // const enteredName = nameInputRef.current.value;
+    // const enteredAge = ageInputRef.current.value;
+
     if(nameInput.trim().length === 0 || ageInput.trim().length === 0) {
       setError({
         title: 'Invalid input',
@@ -38,8 +47,6 @@ function AddUser({onAddNewUser}) {
     }
 
     onAddNewUser(nameInput, ageInput);
-    setNameInput('');
-    setAgeInput('');
   }
 
   function removeErrorMessage() {
@@ -52,9 +59,9 @@ function AddUser({onAddNewUser}) {
       <Card className={s.input}>
         <form onSubmit={addNewUser}>
           <label htmlFor='username'>Add username</label>
-          <input id='username' type='text' value={nameInput} onChange={handleNameChange}/>
+          <input id='username' type='text' value={nameInput} /*ref={nameInputRef}*/ onChange={handleNameChange}/>
           <label htmlFor='age'>Add user age</label>
-          <input id='age' type='number' value={ageInput} onChange={handleAgeChange}/>
+          <input id='age' type='number' value={ageInput} /*ref={ageInputRef}*/ onChange={handleAgeChange}/>
           <Button type='submit'>Add user</Button>
         </form>
       </Card>
