@@ -8,7 +8,7 @@ function App() {
   const [users, setUsers] = useState([]);
 
   function handleNewUser(name, age) {
-    setUsers([{name: name, age: age, id: Math.random()}, ...users]);
+    setUsers((prev) => [{name: name, age: age, id: Math.random()}, ...prev]);
   }
 
   return (

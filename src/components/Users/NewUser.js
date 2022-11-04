@@ -6,7 +6,7 @@ function NewUser({users}) {
     <Card className={s.users}>
       <ul>
       {users.map((user) => (
-        <li>{`Name: ${user.name}, age: ${user.age}`}</li>
+        <li key={user.id}>{`Name: ${user.name}, age: ${user.age}`}</li>
       ))}
       </ul>
     </Card>
